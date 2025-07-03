@@ -395,21 +395,18 @@ public partial class MainWindow: Window {
     public MainWindow() {
         InitializeComponent();
 
-        // 获取入口程序集位置（优先使用Location，若为空则使用BaseDirectory）
-        var entryAssemblyPath = Assembly.GetEntryAssembly()?.Location ?? AppContext.BaseDirectory;
-
-        // 如果 Assembly.Location 为空（单文件应用），则使用 AppContext.BaseDirectory 结合程序集名称
-        if (string.IsNullOrEmpty(entryAssemblyPath) || !File.Exists(entryAssemblyPath)) {
-            // 获取入口程序集名称
-            var assemblyName = Assembly.GetEntryAssembly()?.GetName().Name + ".exe";
-            entryAssemblyPath = Path.Combine(AppContext.BaseDirectory, assemblyName);
-        }
-
         // 获取版本信息
+        var entryAssemblyPath = Environment.ProcessPath!;
         var versionInfo = FileVersionInfo.GetVersionInfo(entryAssemblyPath);
 
-        // 更新UI
-        VersionTextBlock.Text = "v" + versionInfo.ProductVersion;
+        // 提取主要版本号（忽略构建元数据）
+        var productVersion = versionInfo.ProductVersion;
+        if (!string.IsNullOrEmpty(productVersion)) {
+            // 分割版本号和构建元数据（如果存在）
+            var versionParts = productVersion.Split('+');
+            productVersion = versionParts[0];
+        }
+        VersionTextBlock.Text = "v" + productVersion;
         CopyrightTextBlock.Text = versionInfo.LegalCopyright;
         FolderPathBox.Text = CheckPortal2Path();
     }
