@@ -122,7 +122,9 @@ public partial class MainWindow: Window {
           .def-img {
             display: block;
             height: 120px;
+            width: 100%;
             min-width: 120px;
+            object-fit: contain;
             transform: scale(1);
             transition: transform 0.3s;
             user-select: none;
