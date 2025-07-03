@@ -1,0 +1,49 @@
+﻿<Window x:Class="BspFileScanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BspFileScanner"
+        mc:Ignorable="d"
+        Title="Portal 2 Workshop 文件扫描器" MinHeight="155" Height="155" MinWidth="400" Width="500"
+        ResizeMode="CanResizeWithGrip">
+    <Grid ShowGridLines="False" Background="#F8F8F8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28" />
+            <RowDefinition Height="24" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="96" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" VerticalContentAlignment="Center" Padding="0" Margin="8, 4, 0, 0">Portal 2 安装目录</Label>
+        <TextBox x:Name="FolderPathBox" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Height="24"
+                 Padding="0" Margin="8, 0, 0, 0" />
+        <Button Grid.Row="1" Grid.Column="1" Height="24" Margin="8, 0, 8, 0" Click="ChooseFolderButton_OnClick">选择目录</Button>
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Height="24" Width="96" Margin="8"
+                Click="ScanButton_OnClick">
+            开始扫描
+        </Button>
+        <StatusBar Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Height="24" VerticalAlignment="Bottom"
+                   Background="#F0F0F0" BorderBrush="#D7D7D7"
+                   BorderThickness="0,1,0,0">
+            <StatusBarItem>
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://github.com/pansong291/BspFileScanner" RequestNavigate="Hyperlink_RequestNavigate">
+                        pansong291制作
+                    </Hyperlink>
+                </TextBlock>
+            </StatusBarItem>
+            <Separator Background="#D7D7D7" />
+            <StatusBarItem>
+                <TextBlock x:Name="VersionTextBlock">v1.0.0</TextBlock>
+            </StatusBarItem>
+            <Separator Background="#D7D7D7" />
+            <StatusBarItem>
+                <TextBlock x:Name="CopyrightTextBlock">Copyright © 2022</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
